@@ -1,5 +1,5 @@
 from pytest import raises
-from fibonacci.blacklist import blacklist, unblacklist, get_blacklisted
+from fibonacci import blacklist, unblacklist, get_blacklisted
 
 
 def test_empty_blacklist():
@@ -24,3 +24,10 @@ def test_blacklisting_multiple_numbers():
         unblacklist(v)
     for v in values:
         assert v not in get_blacklisted()
+
+
+def test_concurrency_issue_with_reading_blacklist():
+    for v in range(5):
+        blacklist(v)
+    for v in get_blacklisted():
+        unblacklist(v)
