@@ -10,7 +10,8 @@ Description placeholder...
 1. Finally, run the commands below:
 
 ```
-python -m venv venv
+python -m venv venv  # only on first run to create venv
+./venv/Scripts/activate  # from the second run on to activate venv
 pip install -e .
 fibonacci_server
 ```
