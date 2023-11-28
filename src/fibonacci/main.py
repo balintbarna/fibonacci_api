@@ -9,7 +9,10 @@ app = Bottle()
 
 @app.route('/api/fibonacci/<index>', method='GET')
 def get_result(index: str):
-    return {'value': get_fibonacci_value(int(index))}
+    result = get_fibonacci_value(int(index))
+    if result in get_blacklisted():
+        raise ValueError("The result is blacklisted.")
+    return {'value': result}
 
 
 @app.route('/api/fibonaccis/<page>', method='GET')
