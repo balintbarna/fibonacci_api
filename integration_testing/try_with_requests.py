@@ -37,6 +37,12 @@ def list_routine():
     assert len(get(f'{BASE_URL}/api/fibonaccis/0', params=[('size', '10')]).json()['value']) == 10
     assert get(
         f'{BASE_URL}/api/fibonaccis/1').json()['value'][0] == 354224848179261915075
+    assert blacklist(8).status_code == 200
+    less_values = tuple(get(f'{BASE_URL}/api/fibonaccis/0').json()['value'])
+    assert len(less_values) == 99
+    assert less_values[:9] == tuple(x for x in FIRST_TEN_VALUES if not x == 8)
+    assert 8 not in less_values
+    assert unblacklist(8).status_code == 200
 
 
 if __name__ == '__main__':
