@@ -2,7 +2,12 @@ from functools import cache
 
 
 @cache
-def get_fibonacci_value(index: int):
+def get_fibonacci_value(index: int) -> int:
+    """
+    Calculate the fibonacci value at the specified index.
+    The starting values are 0 and 1.
+    Caching is enabled on the function.
+    """
     if not isinstance(index, int):
         raise TypeError
     if index < 0:
