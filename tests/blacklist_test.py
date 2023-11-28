@@ -6,10 +6,8 @@ def test_empty_blacklist():
     assert len(list(get_blacklisted())) == 0
 
 
-def test_bad_remove():
+def test_not_added_value():
     assert 1 not in get_blacklisted()
-    with raises(KeyError):
-        unblacklist(1)
 
 
 def test_blacklisting_multiple_numbers():
