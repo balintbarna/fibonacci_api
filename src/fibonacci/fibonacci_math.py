@@ -1,7 +1,7 @@
 from functools import cache
 
 
-# @cache
+@cache
 def get_fibonacci_value(index: int):
     if not isinstance(index, int):
         raise TypeError
