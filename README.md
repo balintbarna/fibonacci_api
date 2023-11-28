@@ -13,5 +13,9 @@ Description placeholder...
 python -m venv venv  # only on first run to create venv
 ./venv/Scripts/activate  # from the second run on to activate venv
 pip install -e .
-fibonacci_server
+pytest  # check that results are all green
+fibonacci_server  # starts the server, quits with Ctrl+C
 ```
+
+The test using HTTP requests can be run by opening a new terminal session while the server is running,
+activating the virtual environment, and running `python integration_testing/try_with_requests.py`.
