@@ -9,14 +9,22 @@ def request_result(index: int):
     return get(f'{BASE_URL}/api/fibonacci/{index}')
 
 
+def blacklist(value: int):
+    return post(f'{BASE_URL}/api/blacklist/{value}')
+
+
+def unblacklist(value: int):
+    return delete(f'{BASE_URL}/api/blacklist/{value}')
+
+
 def single_value_routine():
     assert request_result(6).json()['value'] == 8
     assert request_result(-1).status_code == 500
-    assert post(f'{BASE_URL}/api/blacklist/8').status_code == 200
+    assert blacklist(8).status_code == 200
     bad_request = request_result(6)
     assert bad_request.status_code == 500
     assert 'ValueError: The result is blacklisted.' in bad_request.text
-    assert delete(f'{BASE_URL}/api/blacklist/8').status_code == 200
+    assert unblacklist(8).status_code == 200
     assert request_result(6).json()['value'] == 8
 
 
